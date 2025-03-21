@@ -14,24 +14,33 @@
             <div class="card-body">
                 <table class="table table-striped">
                     <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nom</th>
-                        <th>Date Naissance</th>
-                        <th>Malade</th>
-                        <th>Score</th>
-                    </tr>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>Date Naissance</th>
+                            <th>Malade</th>
+                            <th>Score</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="patient:${patients}">
-                        <td th:text="${patient.id}"></td>
-                        <td th:text="${patient.nom}"></td>
-                        <td th:text="${patient.dateNaissance}"></td>
-                        <td th:text="${patient.malade}"></td>
-                        <td th:text="${patient.score}"></td>
-                    </tr>
+                        <tr th:each="patient:${patients}">
+                            <td th:text="${patient.id}"></td>
+                            <td th:text="${patient.nom}"></td>
+                            <td th:text="${patient.dateNaissance}"></td>
+                            <td th:text="${patient.malade}"></td>
+                            <td th:text="${patient.score}"></td>
+                        </tr>
                     </tbody>
                 </table>
+                <ul class="nav nav-pills">
+                    <li th:each="page, index:${pages}" class="nav-item p-1">
+                        <a
+                            th:href="@{/index(page=${index.index})}"
+                            th:class="${index.index == currentPage ? 'btn btn-info' : 'btn btn-outline-info'}"
+                            th:text="${index.index}"
+                        ></a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
