@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -30,5 +29,11 @@ public class PatientController {
         model.addAttribute("currentPage", page);
         model.addAttribute("keyword", keyword);
         return "patients";
+    }
+
+    @GetMapping("/delete")
+    public String delete(Long id, String keyword, int page) {
+        patientRepo.deleteById(id);
+        return "redirect:/index?page=" + page + "&keyword=" + keyword;
     }
 }
