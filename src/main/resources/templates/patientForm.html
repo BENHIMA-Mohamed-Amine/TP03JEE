@@ -14,12 +14,12 @@
         <form method="post" th:action="@{save}">
             <div class="mb-3">
                 <label for="nom" class="form-label">Nom</label>
-                <input type="text" class="form-control" id="nom" name="nom" th:value="${patient.nom}" required>
-                <span th:errors="${patient.nom}"></span>
+                <input type="text" class="form-control" id="nom" name="nom" th:field="${patient.nom}">
+                <span th:errors="${patient.nom}" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label for="dateNaissance" class="form-label">Date de Naissance</label>
-                <input type="date" class="form-control" id="dateNaissance" name="dateNaissance" th:value="${patient.dateNaissance}" required>
+                <input type="date" class="form-control" id="dateNaissance" name="dateNaissance" th:fields="${patient.dateNaissance}">
                 <span th:errors="${patient.dateNaissance}"></span>
             </div>
             <div class="mb-3">
@@ -29,8 +29,8 @@
             </div>
             <div class="mb-3">
                 <label for="score" class="form-label">Score</label>
-                <input type="text" class="form-control" id="score" name="score" th:value="${patient.score}" required>
-                <span th:errors="${patient.score}"></span>
+                <input type="text" class="form-control" id="score" name="score" th:fields="${patient.score}">
+                <span th:errors="${patient.score}" class="text-danger"></span>
             </div>
 <!--            display the buttons in the extreme of the div-->
             <div class="d-flex justify-content-between">
