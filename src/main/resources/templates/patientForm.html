@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{navbar.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Patient</title>
+    <link rel="stylesheet" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css">
+</head>
+<body>
+<!-- create container to center the elements in the page with width 750px-->
+    <div layout:fragment="main" class="p-3 container w-50">
+        <form method="post" th:action="@{save}">
+            <div class="mb-3">
+                <label for="nom" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="nom" name="nom" th:value="${patient.nom}" required>
+                <span th:errors="${patient.nom}"></span>
+            </div>
+            <div class="mb-3">
+                <label for="dateNaissance" class="form-label">Date de Naissance</label>
+                <input type="date" class="form-control" id="dateNaissance" name="dateNaissance" th:value="${patient.dateNaissance}" required>
+                <span th:errors="${patient.dateNaissance}"></span>
+            </div>
+            <div class="mb-3">
+                <label for="malade" class="form-label">Malade</label>
+                <input type="checkbox" id="malade" name="malade" th:checked="${patient.malade}">
+                <span th:errors="${patient.malade}"></span>
+            </div>
+            <div class="mb-3">
+                <label for="score" class="form-label">Score</label>
+                <input type="text" class="form-control" id="score" name="score" th:value="${patient.score}" required>
+                <span th:errors="${patient.score}"></span>
+            </div>
+<!--            display the buttons in the extreme of the div-->
+            <div class="d-flex justify-content-between">
+                <input type="hidden" name="id" th:value="${patient.id}"/>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <a class="btn btn-secondary" th:href="@{/index}">Annuler</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
