@@ -12,6 +12,8 @@
 <!-- create container to center the elements in the page with width 750px-->
     <div layout:fragment="main" class="p-3 container w-50">
         <form method="post" th:action="@{save}">
+            <input type="hidden" name="page" th:value="${page}" />
+            <input type="hidden" name="keyword" th:value="${keyword}" />
             <div class="mb-3">
                 <label for="nom" class="form-label">Nom</label>
                 <input type="text" class="form-control" id="nom" name="nom" th:field="${patient.nom}">
@@ -29,7 +31,7 @@
             </div>
             <div class="mb-3">
                 <label for="score" class="form-label">Score</label>
-                <input type="text" class="form-control" id="score" name="score" th:fields="${patient.score}">
+                <input type="text" class="form-control" id="score" name="score" th:fields="${patient.score}" th:value="${patient.score}">
                 <span th:errors="${patient.score}" class="text-danger"></span>
             </div>
 <!--            display the buttons in the extreme of the div-->
