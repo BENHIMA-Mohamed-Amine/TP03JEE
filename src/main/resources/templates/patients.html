@@ -43,7 +43,7 @@
                         <td th:text="${patient.dateNaissance}"></td>
                         <td th:text="${patient.malade}"></td>
                         <td th:text="${patient.score}"></td>
-                        <td>
+                        <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
                             <a
                                 class="btn btn-danger"
                                 th:href="@{/delete(id=${patient.id}, keyword=${keyword}, page=${currentPage})}"
@@ -52,7 +52,7 @@
                                 Delete
                             </a>
                         </td>
-                        <td>
+                        <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
                             <a
                                 class="btn btn-success"
                                 th:href="@{/editPatient(id=${patient.id}, keyword=${keyword}, page=${currentPage})}"

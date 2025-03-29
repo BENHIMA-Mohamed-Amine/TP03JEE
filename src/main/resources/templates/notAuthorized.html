@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{navbar.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>notAuthorized</title>
+</head>
+<body>
+  <div class="alert alert-danger" role="alert" layout:fragment="main">
+    <h4 class="alert-heading">Accès refusé</h4>
+    <p>Vous n'avez pas l'autorisation d'accéder à cette page.</p>
+    <hr>
+    <p class="mb-0">Veuillez contacter l'administrateur si vous pensez que c'est une erreur.</p>
+  </div>
+</body>
+</html>
