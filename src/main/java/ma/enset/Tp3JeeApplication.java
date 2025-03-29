@@ -6,6 +6,11 @@ import ma.enset.repository.PatientRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 import java.util.Date;
 
@@ -34,5 +39,27 @@ public class Tp3JeeApplication implements CommandLineRunner {
         patientRepo.save(new Patient(null, "Karim", new Date(), false, 140));
         patientRepo.save(new Patient(null, "Salma", new Date(), true, 100));
         patientRepo.save(new Patient(null, "Rachid", new Date(), false, 80));
+    }
+
+    @Bean
+    CommandLineRunner commandLineRunner(JdbcUserDetailsManager jdbcUserDetailsManager, PasswordEncoder passwordEncoder) {
+//        check if the users already exists
+        if(jdbcUserDetailsManager.userExists("user1") && jdbcUserDetailsManager.userExists("admin")) {
+            return args -> {};
+        }
+        return args -> {
+            jdbcUserDetailsManager.createUser(
+                User.withUsername("user1")
+                .password(passwordEncoder.encode("qwer"))
+                .roles("USER")
+                .build()
+            );
+            jdbcUserDetailsManager.createUser(
+                User.withUsername("admin")
+                .password(passwordEncoder.encode("1234"))
+                .roles("ADMIN", "USER")
+                .build()
+            );
+        };
     }
 }
