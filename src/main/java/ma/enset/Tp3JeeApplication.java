@@ -3,6 +3,7 @@ package ma.enset;
 import lombok.AllArgsConstructor;
 import ma.enset.entities.Patient;
 import ma.enset.repository.PatientRepo;
+import ma.enset.security.service.AccountService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -42,6 +43,21 @@ public class Tp3JeeApplication implements CommandLineRunner {
     }
 
     @Bean
+    CommandLineRunner commandLineRunnerUserDetails(AccountService accountService){
+        return args -> {
+          accountService.addNewRole("USER");
+          accountService.addNewRole("ADMIN");
+          accountService.addNewUser("user1", "1234", "1234", "email1");
+          accountService.addNewUser("user2", "1234", "1234", "email1");
+          accountService.addNewUser("admin", "1234", "1234", "email2");
+
+          accountService.addRoleToUser("user1", "USER");
+          accountService.addRoleToUser("user2", "USER");
+          accountService.addRoleToUser("admin", "ADMIN");
+        };
+    }
+
+//    @Bean
     CommandLineRunner commandLineRunner(JdbcUserDetailsManager jdbcUserDetailsManager, PasswordEncoder passwordEncoder) {
 //        check if the users already exists
         if(jdbcUserDetailsManager.userExists("user1") && jdbcUserDetailsManager.userExists("admin")) {
@@ -61,5 +77,9 @@ public class Tp3JeeApplication implements CommandLineRunner {
                 .build()
             );
         };
+    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
